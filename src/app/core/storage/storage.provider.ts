@@ -1,6 +1,6 @@
 import { EnvironmentProviders, Type, makeEnvironmentProviders } from '@angular/core';
 import { STORAGE_SERVICE, StorageService } from './models/storage';
-import { LocalStorageService } from './local-storage.service';
+import { LocalStorageService } from './implementations/local-storage.service';
 
 export function provideStorage(
   implementation: Type<StorageService> = LocalStorageService

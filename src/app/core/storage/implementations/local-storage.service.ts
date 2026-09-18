@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StorageService } from './models/storage';
+import { StorageService } from '../models/storage';
 
 @Injectable()
 export class LocalStorageService implements StorageService {

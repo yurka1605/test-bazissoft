@@ -1,0 +1,52 @@
+<form 
+    class="form"
+    appearance="floating"
+    tuiCardLarge
+    tuiForm="m"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()" 
+>
+    <header tuiHeader>
+        <h1 tuiTitle>
+            Добро пожаловать в TestBazissoft
+            <span tuiSubtitle>Пожалуйста, войдите в свою учетную запись</span>
+        </h1>
+    </header>
+
+    <tui-textfield [tuiTextfieldCleaner]="false">
+        <label tuiLabel>Логин</label>
+        <input
+            tuiInput
+            formControlName="username"
+            placeholder="Введите логин"
+            name="username"
+            autocomplete="username"
+        />
+    </tui-textfield>
+    <tui-error formControlName="username"/>
+    
+    <tui-textfield [tuiTextfieldCleaner]="false">
+        <label tuiLabel>Пароль</label>
+        	<input
+                placeholder="Введите пароль"
+                tuiInput
+                type="password"
+                formControlName="password"
+                name="password"
+                autocomplete="current-password"
+            />
+            <tui-icon tuiPassword />
+    </tui-textfield>
+    <tui-error formControlName="password"/>
+
+    <footer>
+        <button
+            tuiButton
+            type="submit"
+            size="m"
+            [disabled]="loginForm.invalid"
+        >
+            Войти
+        </button>
+    </footer>
+</form>

@@ -1,4 +1,7 @@
 :host {
-    display: block;
+    display: flex;
+    flex-direction: column;
     height: 100dvh;
+    align-items: center;
+    justify-content: center;
 }
