@@ -1,13 +1,13 @@
-import { TuiRoot } from '@taiga-ui/core';
-import { Component, signal } from '@angular/core';
+import { TUI_DARK_MODE, TuiRoot } from '@taiga-ui/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   imports: [RouterOutlet, TuiRoot],
   selector: 'app-root',
-  styleUrl: './app.scss',
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('test-bazissoft');
+  protected readonly isDarkMode = inject(TUI_DARK_MODE);
+  protected readonly theme = computed<'dark' | null>(() => this.isDarkMode() ? 'dark' : null)
 }
