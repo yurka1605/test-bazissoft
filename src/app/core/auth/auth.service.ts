@@ -8,23 +8,25 @@ export class AuthService {
     private _storage = inject(STORAGE_SERVICE);
     private _api = inject(AuthApiService);
     
-    private readonly _isAuthenticatedKey = 'isAuthenticated';
-    private readonly _isAuthenticatedState = signal(
-        this._storage.get<boolean>(this._isAuthenticatedKey)
+    private readonly _isAuthenticatedUserKey = 'authenticatedUser';
+    private readonly _authenticatedUserState = signal(
+        this._storage.get<string | null>(this._isAuthenticatedUserKey) ?? null
     );
-    readonly isAuthenticated = this._isAuthenticatedState.asReadonly();
+    readonly authenticatedUser = this._authenticatedUserState.asReadonly();
 
     login(username: string, password: string): Observable<void> {
         return this._api.login(username, password)
-            .pipe(tap(() => this._changeAuthentication(true)));
+            .pipe(tap(() => this._changeAuthenticationUser(username)));
     }
 
     logout(): Observable<void> {
-        return this._api.logout().pipe(tap(() => this._changeAuthentication(false)));
+        return this._api.logout().pipe(tap(() => this._changeAuthenticationUser(null)));
     }
 
-    private _changeAuthentication(isAuthenticated: boolean) {
-        this._storage.set(this._isAuthenticatedKey, isAuthenticated);
-        this._isAuthenticatedState.set(isAuthenticated);
+    private _changeAuthenticationUser(authenticatedUser: string | null) {
+        authenticatedUser 
+            ? this._storage.set<string>(this._isAuthenticatedUserKey, authenticatedUser)
+            : this._storage.remove(this._isAuthenticatedUserKey);
+        this._authenticatedUserState.set(authenticatedUser);
     }
 }
