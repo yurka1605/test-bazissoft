@@ -7,7 +7,11 @@ import { Observable, tap } from "rxjs";
 export class AuthService {
     private _storage = inject(STORAGE_SERVICE);
     private _api = inject(AuthApiService);
-    private readonly _isAuthenticatedState = signal(this._storage.get<boolean>('isAuthenticated'));
+    
+    private readonly _isAuthenticatedKey = 'isAuthenticated';
+    private readonly _isAuthenticatedState = signal(
+        this._storage.get<boolean>(this._isAuthenticatedKey)
+    );
     readonly isAuthenticated = this._isAuthenticatedState.asReadonly();
 
     login(username: string, password: string): Observable<void> {
@@ -20,7 +24,7 @@ export class AuthService {
     }
 
     private _changeAuthentication(isAuthenticated: boolean) {
-        this._storage.set('isAuthenticated', isAuthenticated);
+        this._storage.set(this._isAuthenticatedKey, isAuthenticated);
         this._isAuthenticatedState.set(isAuthenticated);
     }
 }

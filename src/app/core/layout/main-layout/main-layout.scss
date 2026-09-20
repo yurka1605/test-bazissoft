@@ -1,0 +1,12 @@
+:host {
+    display: block;
+    height: 100dvh;
+}
+
+header[tuiNavigationHeader] {
+    justify-content: space-between;
+}
+
+a.active {
+    color: var(--tui-text-action);
+}

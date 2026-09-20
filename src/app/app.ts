@@ -9,5 +9,5 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly isDarkMode = inject(TUI_DARK_MODE);
-  protected readonly theme = computed<'dark' | null>(() => this.isDarkMode() ? 'dark' : null)
+  protected readonly theme = computed<string | null>(() => this.isDarkMode() ? 'dark' : null)
 }

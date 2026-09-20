@@ -1,3 +1,31 @@
-<main>
+<header tuiNavigationHeader>
+    <div tuiNavigationLogo>
+        <tui-icon icon="@tui.home" />
+        <span>TestBazissoft</span>
+    </div>
+
+    <nav tuiNavigationSegments>
+        @for (route of routes; track route.path) {
+            <a 
+                tuiButton
+                routerLinkActive="active"
+                [routerLink]="['/', route.path]"
+            >
+                {{ route.data.title }}
+            </a>
+        }
+    </nav>
+
+    <button 
+        appearance="secondary-grayscale" 
+        iconStart="@tui.log-out" 
+        tuiButton 
+        type="button" 
+        (click)="logout()"
+    >
+        Выйти
+    </button>
+</header>
+<main tuiNavigationMain>
     <router-outlet />
 </main>
