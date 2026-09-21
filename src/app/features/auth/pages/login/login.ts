@@ -15,6 +15,7 @@ import {
   TuiInput,
   TuiIcon,
   TUI_VALIDATION_ERRORS,
+  TuiNotificationService,
 } from "@taiga-ui/core";
 import { TuiForm, TuiHeader, TuiCardLarge } from "@taiga-ui/layout";
 import { TuiPassword, TuiToastService } from "@taiga-ui/kit";
@@ -22,8 +23,7 @@ import { AuthService } from "@core/auth";
 import { passwordValidator } from "@shared/validators";
 import { Login as LoginModel } from '../../models/login';
 import { catchError } from "rxjs";
-
-type LoginForm = {[K in keyof LoginModel]: FormControl<LoginModel[K]>};
+import { TypeToForm } from "@shared/utils/type-to-form";
 
 @Component({
   imports: [
@@ -57,13 +57,13 @@ export class Login {
   private readonly _authService = inject(AuthService);
   private readonly _router = inject(Router);
   private readonly _route = inject(ActivatedRoute);
-  private readonly _toastService = inject(TuiToastService);
+  private readonly _alertsService = inject(TuiNotificationService);
   private readonly _destroyRef = inject(DestroyRef);
 
   private readonly _returnUrl =
     this._route.snapshot.queryParams["returnUrl"] || "/";
 
-  readonly loginForm = new FormGroup<LoginForm>({
+  readonly loginForm = new FormGroup<TypeToForm<LoginModel>>({
     username: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     password: new FormControl('', { nonNullable: true, validators: [
       Validators.required,
@@ -84,7 +84,7 @@ export class Login {
       .pipe(
         catchError((err) => {
           this.serverError.set(err.message);
-          return this._toastService.open(err.message);
+          return this._alertsService.open(err.message, { appearance: 'negative' });
         }),
         takeUntilDestroyed(this._destroyRef))
       .subscribe(() => this._router.navigateByUrl(this._returnUrl));

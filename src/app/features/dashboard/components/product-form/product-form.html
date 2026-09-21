@@ -1,0 +1,22 @@
+<form tuiForm [formGroup]="form">
+    <tui-textfield>
+        <label tuiLabel>Название товара</label>
+        <input name="name" tuiAutoFocus tuiInput formControlName="name" />
+    </tui-textfield>
+    <tui-textfield>
+        <label tuiLabel>Цена товара</label>
+        <input name="price" type="number" tuiInput formControlName="price" />
+    </tui-textfield>
+    <tui-textfield>
+        <label tuiLabel>НДС</label>
+        <input name="vat" type="number" tuiInput formControlName="vat" />
+    </tui-textfield>
+    <footer>
+        <button appearance="secondary" tuiButton type="button" (click)="context.$implicit.complete()">
+            Cancel
+        </button>
+        <button tuiButton type="submit" [disabled]="!form.dirty || !isFormChanged()">
+            Submit
+        </button>
+    </footer>
+</form>

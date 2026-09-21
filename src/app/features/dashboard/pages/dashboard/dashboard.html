@@ -1,1 +1,14 @@
-<p>dashboard works!</p>
+<header>
+    <h1>Каталог товаров</h1>
+    <button
+        appearance="outline"
+        size="m"
+        tuiButton
+        type="button"
+        (click)="create()"
+    >
+        <tui-icon icon="@tui.circle-plus" />
+    </button>
+</header>
+
+<app-products></app-products>

@@ -1,12 +1,12 @@
-import { inject, Injectable, signal } from "@angular/core";
+import { inject, Service, signal } from "@angular/core";
 import { STORAGE_SERVICE } from "../storage";
 import { AuthApiService } from "./auth-api.service";
 import { Observable, tap } from "rxjs";
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class AuthService {
-    private _storage = inject(STORAGE_SERVICE);
-    private _api = inject(AuthApiService);
+    private readonly _storage = inject(STORAGE_SERVICE);
+    private readonly _api = inject(AuthApiService);
     
     private readonly _isAuthenticatedUserKey = 'authenticatedUser';
     private readonly _authenticatedUserState = signal(
