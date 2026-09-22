@@ -18,7 +18,7 @@ import {
   TuiNotificationService,
 } from "@taiga-ui/core";
 import { TuiForm, TuiHeader, TuiCardLarge } from "@taiga-ui/layout";
-import { TuiPassword, TuiToastService } from "@taiga-ui/kit";
+import { TuiPassword } from "@taiga-ui/kit";
 import { AuthService } from "@core/auth";
 import { passwordValidator } from "@shared/validators";
 import { Login as LoginModel } from '../../models/login';

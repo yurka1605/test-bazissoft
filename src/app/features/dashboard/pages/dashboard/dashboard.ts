@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { Products } from '../../components/products/products';
+import { ProductTable } from '../../components/products/product-table';
 import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
 import { TuiButton, TuiDialogService, TuiIcon, TuiNotificationService } from '@taiga-ui/core';
 import { ProductForm } from '../../components/product-form/product-form';
@@ -9,7 +9,7 @@ import { Product } from '@features/dashboard/models/product';
 import { ProductsService } from '@features/dashboard/products.service';
 
 @Component({
-  imports: [Products, TuiIcon, TuiButton],
+  imports: [ProductTable, TuiIcon, TuiButton],
   selector: 'app-dashboard',
   styleUrl: './dashboard.scss',
   templateUrl: './dashboard.html',

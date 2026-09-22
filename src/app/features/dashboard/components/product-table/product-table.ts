@@ -1,5 +1,4 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { TuiTable } from '@taiga-ui/addon-table';
 import { ProductsService } from '../../products.service';
 import { Product } from '../../models/product';
@@ -11,12 +10,12 @@ import { TUI_CONFIRM, TuiConfirmData } from '@taiga-ui/kit';
 import { of, switchMap } from 'rxjs';
 
 @Component({
-  imports: [FormsModule, TuiTable, TuiButton],
-  selector: 'app-products',
-  styleUrl: './products.scss',
-  templateUrl: './products.html',
+  imports: [TuiTable, TuiButton],
+  selector: 'app-product-table',
+  styleUrl: './product-table.scss',
+  templateUrl: './product-table.html',
 })
-export class Products {
+export class ProductTable {
   private readonly _dialogService = inject(TuiDialogService);
   private readonly _alertsService = inject(TuiNotificationService);
   private readonly _productsService = inject(ProductsService);

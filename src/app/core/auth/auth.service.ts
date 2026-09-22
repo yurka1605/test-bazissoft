@@ -1,18 +1,16 @@
-import { inject, Service, signal } from "@angular/core";
-import { STORAGE_SERVICE } from "../storage";
+import { inject, Service } from "@angular/core";
+import { BaseDataProvider } from "../storage";
 import { AuthApiService } from "./auth-api.service";
 import { Observable, tap } from "rxjs";
 
 @Service()
-export class AuthService {
-    private readonly _storage = inject(STORAGE_SERVICE);
+export class AuthService extends BaseDataProvider<string | null> {
     private readonly _api = inject(AuthApiService);
-    
-    private readonly _isAuthenticatedUserKey = 'authenticatedUser';
-    private readonly _authenticatedUserState = signal(
-        this._storage.get<string | null>(this._isAuthenticatedUserKey) ?? null
-    );
-    readonly authenticatedUser = this._authenticatedUserState.asReadonly();
+    readonly authenticatedUser = this.data.asReadonly();
+
+    constructor() {
+        super('authenticatedUser', null);
+    }
 
     login(username: string, password: string): Observable<void> {
         return this._api.login(username, password)
@@ -24,9 +22,7 @@ export class AuthService {
     }
 
     private _changeAuthenticationUser(authenticatedUser: string | null) {
-        authenticatedUser 
-            ? this._storage.set<string>(this._isAuthenticatedUserKey, authenticatedUser)
-            : this._storage.remove(this._isAuthenticatedUserKey);
-        this._authenticatedUserState.set(authenticatedUser);
+        this.data.set(authenticatedUser);
+        this.updateStorage();
     }
 }

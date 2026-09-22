@@ -1,15 +1,25 @@
 <header tuiNavigationHeader>
+    <button 
+        appearance="secondary-grayscale" 
+        iconStart="@tui.menu"  
+        tuiButton
+        type="button"
+        class="mobile-menu-trigger"
+        (click)="toggleMobileMenu()"
+    ></button>
+
     <div tuiNavigationLogo>
         <tui-icon icon="@tui.home" />
         <span>TestBazissoft</span>
     </div>
 
-    <nav tuiNavigationSegments>
+    <nav class="navigation" [class.open]="open()">
         @for (route of routes; track route.path) {
             <a 
                 tuiButton
                 routerLinkActive="active"
                 [routerLink]="['/', route.path]"
+                (click)="open.set(false)"
             >
                 {{ route.data.title }}
             </a>

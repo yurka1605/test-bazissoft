@@ -1,0 +1,27 @@
+<div class="table-wrapper">
+    <table
+        tuiTable
+        size="m"
+        class="table"
+    >
+        <thead>
+            <th tuiTh>ID</th>
+            <th tuiTh>Название товара</th>
+            <th tuiTh>Логин покупателя</th>
+            <th tuiTh>Сумма покупки</th>
+            <th tuiTh>Дата операции</th>
+        </thead>
+        <tbody tuiTbody>
+            @for (purchace of purchaceHistoryList(); track purchace.id) {
+                <tr tuiTr>
+                    <td tuiTd>{{ purchace.id }}</td>
+                    <td tuiTd>{{ purchace.productName }}</td>
+                    <td tuiTd>{{ purchace.username }}</td>
+                    <td tuiTd>{{ purchace.amount }}</td>
+                    <td tuiTd>{{ purchace.date | date:'medium':timezone:'ru-RU' }}</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

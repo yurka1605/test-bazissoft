@@ -25,10 +25,15 @@ export class MainLayout {
   private readonly destroyRef = inject(DestroyRef);
 
   protected readonly routes = navRoutes.sort((a, b) => a.data.order - b.data.order);
+  protected readonly open = signal(false);
 
   logout() {
     this.authService.logout()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => this.router.navigate(['/login']));
+  }
+
+  toggleMobileMenu() {
+    this.open.update((isOpen) => !isOpen);
   }
 }

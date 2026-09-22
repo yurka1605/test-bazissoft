@@ -1,0 +1,49 @@
+<div class="table-wrapper">
+    <table
+        tuiTable
+        size="m"
+        class="table"
+    >
+        <thead>
+            <th tuiTh>ID</th>
+            <th tuiTh>Название</th>
+            <th tuiTh>Цена</th>
+            <th tuiTh>НДС</th>
+            <th tuiTh>Действия</th>
+        </thead>
+        <tbody tuiTbody>
+            @for (product of products(); track product.id) {
+                <tr tuiTr>
+                    <td tuiTd>{{ product.id }}</td>
+                    <td tuiTd>{{ product.name }}</td>
+                    <td tuiTd>{{ product.price }}</td>
+                    <td tuiTd>{{ product.vat }}</td>
+                    <td tuiTd>
+                        <span tuiStatus>
+                            <button
+                                appearance="action"
+                                iconStart="@tui.pencil"
+                                size="xs"
+                                tuiIconButton
+                                type="button"
+                                (click)="edit(product)"
+                            >
+                                Edit
+                            </button>
+                            <button
+                                appearance="action-destructive"
+                                iconStart="@tui.trash"
+                                size="xs"
+                                tuiIconButton
+                                type="button"
+                                (click)="remove(product)"
+                            >
+                                Remove
+                            </button>
+                        </span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -10,3 +10,37 @@ header[tuiNavigationHeader] {
 a.active {
     color: var(--tui-text-action);
 }
+
+.mobile-menu-trigger {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .navigation {
+        position: fixed;
+        top: 3rem;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        block-size: 0;
+        width: 100%;
+        overflow: hidden;
+        background: var(--tui-background-base);
+        transition: all .3s ease-in;
+    }
+
+    [tuiNavigationLogo] tui-icon {
+        display: none;
+    }
+
+    .mobile-menu-trigger {
+        display: inline-flex;
+    }
+
+    .navigation.open {
+        height: 100%;
+    }
+}
