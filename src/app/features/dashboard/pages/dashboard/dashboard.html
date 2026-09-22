@@ -1,14 +1,45 @@
 <header>
     <h1>Каталог товаров</h1>
-    <button
-        appearance="action"
-        size="m"
-        tuiButton
-        type="button"
-        (click)="create()"
-    >
-        <tui-icon icon="@tui.circle-plus" />
-    </button>
+
+    <div class="actions">
+        <button
+            appearance="action"
+            size="m"
+            tuiButton
+            type="button"
+            (click)="create()"
+        >
+            <tui-icon icon="@tui.circle-plus" />
+        </button>
+
+        <input 
+            #fileInput
+            type="file" 
+            accept="application/json" 
+            style="display: none"
+            (change)="importData($event)"
+        />
+
+        <button 
+            aria-label="Импорт из JSON"
+            appearance="action"
+            tuiButton
+            type="button" 
+            size="m"
+            iconStart="@tui.upload"
+            (click)="fileInput.click()">
+        </button>
+
+        <button 
+            aria-label="Экспорт в JSON"
+            appearance="action"
+            tuiButton
+            type="button" 
+            size="m"
+            iconStart="@tui.download"
+            (click)="exportData()">
+        </button>
+    </div>
 </header>
 
 <app-product-table></app-product-table>

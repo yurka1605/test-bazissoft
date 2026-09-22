@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { TuiTable } from '@taiga-ui/addon-table';
-import { ProductsService } from '../../products.service';
+import { ProductsService } from '../../services/products.service';
 import { Product } from '../../models/product';
 import { TuiButton, TuiDialogService, TuiIcon, TuiNotificationService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
