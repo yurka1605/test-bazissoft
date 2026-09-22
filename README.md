@@ -1,59 +1,84 @@
 # TestBazissoft
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
+* frontend-приложение для управления каталогом товаров
+* просмотр истории покупок
+* авторизация пользователя
+* хранение данных на стороне клиента localstorage
 
-## Development server
+## Функциональность
 
-To start a local development server, run:
+### Авторизация
+
+* форма логина и пароля
+* валидация полей
+* проверка тестовых credentials
+* сохранение состояния авторизации
+* защита приватных маршрутов
+
+### Каталог товаров
+
+* просмотр списка товаров
+* добавление товара
+* редактирование товара
+* удаление товара с подтверждением
+* сохранение изменений в `localStorage`
+* функциональность import/export JSON
+
+### История покупок
+
+* просмотр истории покупок
+
+### Навигация
+
+* переход между каталогом и историей
+* отображение активного раздела
+* доступ только авторизованным пользователям
+
+## Архитектура проекта
+
+core - основные сущности auth, main layout, storage - ими пользуются все features
+feature - фичи проекта, все что касается конкретной features(состояние, страницы, компоненты, ...) - инкапсулировано внутри feature
+shared - утилиты, валидаторы
+
+При необходимости легко масштабируется, если нужны межфичевые связи можно добавить папки для useCases
+
+## Ключевые технические решения
+
+### Storage 
+
+* инкапсулирован через интефейс и InjectionToken
+* конкретная реализация провайдится через DI на уровне приложения
+* добавлен базовый абстрактный класс для работы со стореджем, для устранения дублирования
+* сервисы фич используют базовый класс путем наследования добавляя свою логику и дергая методы базового класса
+
+## Запуск проекта
+
+### Установка
 
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Запуск
 
 ```bash
-ng generate component component-name
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Сборка
 
 ```bash
-ng generate --help
+npm run build
 ```
 
-## Building
+## Тестовые данные
 
-To build the project run:
+| Параметр | Значение   |
+| -------- | ---------- |
+| Логин    | `test`     |
+| Пароль   | `Test1234` |
 
-```bash
-ng build
-```
+## Дополнительная функциональность
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Import/export реализована, так как часто в бизнес-требованиях востребован такой функционал
+Также удобна во время тестирования функционала 
